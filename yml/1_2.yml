@@ -1,0 +1,37 @@
+input: '11x1111'
+blank: ' '
+start state: 1
+table:
+  # scan to the rightmost digit
+  1:
+    [1, x, 0] : R
+    ' ': {L: 2}
+  # then carry the 1
+  2:
+    0: L
+    1: {write: 0, L: 3}
+    x: {L: 8}
+  3:
+    [1, 0, ' ']: L
+    x: {L: 4}
+  4:
+    0: L
+    1: {write: 0, R: 5}
+    ' ': {R: 7}
+  5:
+    [0, 1, x]: R
+    ' ': {R: 6}
+  6:
+    1: R
+    ' ': {write: 1, L: 3}
+  7:
+    0: {write: 1, R}
+    x: {R: 1}
+  8:
+    1: L
+    ' ': {R: 9}
+  9:
+    [1, 0, x]: {write: ' ', R}
+    ' ': {R: done}
+    
+  done:

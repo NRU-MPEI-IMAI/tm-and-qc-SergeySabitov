@@ -1,0 +1,15 @@
+input: '1111+111'
+blank: ' '
+start state: find_+
+table:
+  # scan to the rightmost digit
+  find_+:
+    1: R
+    +: {write: 1, R: to_the_end}
+  # then carry the 1
+  to_the_end:
+    1: R
+    ' ': {L: delete_1}
+  delete_1:
+    1: {write: ' ', L: done}
+  done:

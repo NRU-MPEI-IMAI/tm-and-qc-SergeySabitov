@@ -1,0 +1,23 @@
+input: '0001112222'
+blank: ' '
+start state: find_0
+table:
+  find_0:
+    0: {write: x, R: find_1}
+    x: R
+    [1, 2]: {R: reject}
+    ' ': {R: accept}
+  find_1:
+    [0, x]: R
+    1: {write: x, R: find_2}
+    [2, ' ']: {R: reject}
+  find_2:
+    [1, x]: R
+    2: {write: x, L: to_begin}
+    ' ': {R: reject}
+  to_begin:
+    [0, 1, 2, x]: L
+    ' ': {R: find_0}
+  accept:
+
+  reject:
